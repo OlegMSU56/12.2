@@ -19,8 +19,22 @@ class TournamentTest(unittest.TestCase):
         for place, runner in sorted(cls.all_results.items()):
             print(f'Место {place}: {runner.name}')
 
-    def test_race_usain_andrey_nick(self):
+    def test_first_tournament(self):
         tournament = run_2.Tournament(1540, self.runners['Usain'], self.runners['Andrey'], self.runners['Nick'])
+        results = tournament.start()
+        self.all_results.update(results)
+        last_runner = results[max(results.keys())]  # Самый последний бегун
+        self.assertTrue(last_runner.name == 'Nick')
+
+    def test_second_tournament(self):
+        tournament = run_2.Tournament(90, self.runners['Andrey'], self.runners['Nick'])
+        results = tournament.start()
+        self.all_results.update(results)
+        last_runner = results[max(results.keys())]  # Самый последний бегун
+        self.assertTrue(last_runner.name == 'Nick')
+
+    def test_third_tournament(self):
+        tournament = run_2.Tournament(90, self.runners['Usain'], self.runners['Andrey'], self.runners['Nick'])
         results = tournament.start()
         self.all_results.update(results)
         last_runner = results[max(results.keys())]  # Самый последний бегун
